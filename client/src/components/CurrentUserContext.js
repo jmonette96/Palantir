@@ -1,10 +1,14 @@
-import { useState, createContext, useEffect } from 'react';
+import { useState, createContext } from 'react';
 
 
 export const CurrentUserContext = createContext(null);
 
 export const CurrentUserProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState(
+        !localStorage.getItem("user") ?
+        null :
+        JSON.parse(localStorage.getItem("user"))
+    );
 
 
     

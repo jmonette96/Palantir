@@ -8,12 +8,25 @@ import Movie from './components/Movies/Movie';
 import MoviesPage from './components/Movies/MoviePage';
 import CharactersPage from './components/Characters/CharactersPage';
 import Profile from './components/Profile';
+import { createGlobalStyle } from 'styled-components'
 
-
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: #f2f2f2;
+    height: 100%;
+    margin:0;
+    color: black;
+    font-family: 'Bilbo', cursive;
+  }
+  html {
+    height: 100%;
+  }
+`
 
 const App = () => {
   return (
     <BrowserRouter>
+      <GlobalStyle  />
         <Header/>
         <Routes>
           <Route path="/" element={<Homepage />} />

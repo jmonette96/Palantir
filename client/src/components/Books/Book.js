@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useEffect, useState } from "react";
 import { instance } from '../../utils/axios';
 
-/* /book/:id/chapter */
 
 const Book = ({bookId, handleSwitchBack}) => {
     const [chapters,setChapters] = useState([]);

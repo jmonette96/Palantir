@@ -1,10 +1,12 @@
-import { useEffect, useState  } from "react";
-import { useNavigate } from "react-router-dom";
-import { instance } from "../../utils/axios";
+import { useState  } from "react";
 import Movie from "./Movie";
 import styled from 'styled-components';
+import FavouritesButton from "../FavouritesButton";
+import { CurrentUserContext } from "../CurrentUserContext";
+import {useContext} from 'react';
 
 const Movies = ({movieInfo}) => {
+    const {currentUser} = useContext(CurrentUserContext);
     const [showMovie, setShowMovie] = useState(false)
     const [ movie, setMovie] = useState(-1);
 
@@ -29,7 +31,13 @@ const Movies = ({movieInfo}) => {
                                 src={require(`../../assets/movie_pictures/${movie.name}.jpg`)}
                                 onClick={() => handleShowMovie(movie)}
                             />
+                            {
+                                currentUser && (
+                                    <FavouritesButton itemId={movie._id} category={"movie"}/>
+                                )
+                            }
                         </div>
+
                     ))
                     :
                     <Movie movieData={movie} handleSwitch={handleSwitch}/>

@@ -73,7 +73,7 @@ const getUserById = async (id) => {
     }
 }
 
-const getFavoritesByUserId = async (user) => {
+const getFavouritesByUserId = async (id) => {
     try {
         await client.connect();
         console.log("Connected to MongoDB server");
@@ -82,9 +82,48 @@ const getFavoritesByUserId = async (user) => {
 
         const favourites = database.collection("favourites");
 
-        const result = await favourites.find({userId: user.sid}).toArray();
+        const result = await favourites.find({userId: id}).toArray();
 
-        return {data: result, status: 200};
+        return result;
+    } catch (err) {
+        console.error(err);
+        return {data: "Error", status: 500}
+    } finally {
+        await client.close();
+        console.log("Disconnected to MongoDB server");
+    }
+}
+
+const getFavouritesById = async (id) => {
+    try {
+        await client.connect();
+        console.log("Connected to MongoDB server");
+        
+        const database = client.db("Palantir");
+
+        const favourites = database.collection("favourites");
+
+        return await favourites.findOne({_id: new ObjectId(id)})
+
+    } catch (err) {
+        console.error(err);
+        return {data: "Error", status: 500}
+    } finally {
+        await client.close();
+        console.log("Disconnected to MongoDB server");
+    }
+}
+
+const deleteFavourite = async(userId, favouriteId) => {
+    try {
+        await client.connect();
+        console.log("Connected to MongoDB server");
+        
+        const database = client.db("Palantir");
+        const favourites = database.collection("favourites");
+        return await favourites.deleteOne({
+            $where: function() {return this.userId == userId && this.favouriteId == favouriteId}
+        })
     } catch (err) {
         console.error(err);
         return {data: "Error", status: 500}
@@ -95,7 +134,7 @@ const getFavoritesByUserId = async (user) => {
 }
 
 //when we hit the endpoint, we will get the user, the favorite ID and the category 
-const addFavourite = async (user, favoriteId, category) => { 
+const addFavourite = async (userId, favouriteId, category) => { 
     try {
         await client.connect();
         console.log("Connected to MongoDB server");
@@ -105,15 +144,15 @@ const addFavourite = async (user, favoriteId, category) => {
         const favourites = database.collection("favourites");
 
         const favourite = { 
-            userId: user.sid,
-            favoriteId: favoriteId,
-            category: category
+            userId,
+            favouriteId,
+            category
         }
 
         const result = await favourites.insertOne(favourite);
 
         console.log(`A document was inserted with the _id: ${result.insertedId}`);
-        return {data: result, status: 200};
+        return result.insertedId;
     } catch (err) {
         console.error(err);
         return {data: "Error", status: 500}
@@ -127,7 +166,9 @@ const addFavourite = async (user, favoriteId, category) => {
 module.exports = {
     addUser,
     addFavourite,
-    getFavoritesByUserId,
+    getFavouritesByUserId,
+    getFavouritesById,
     getUserByEmail,
-    getUserById
+    getUserById,
+    deleteFavourite
 };

@@ -23,9 +23,11 @@ const config = {
 const {
     addUser,
     getFavouritesByUserId,
+    getFavouritesById,
     getUserByEmail,
     getUserById,
     addFavourite,
+    deleteFavourite
 } = require("./handlers");
 
 const BASE_URL = 'https://the-one-api.dev/v2';
@@ -81,17 +83,29 @@ express()
 
     .get("/users/:id", async (req,res) => {
         const id = req.params.id;
-        const data = await getUserById(id);
-
+        let data = await getUserById(id);
+        //also get the users favourited items
+        const usersFavourites = await getFavouritesByUserId(id);
+        
+        data["favourites"] = usersFavourites;
         res.status(200).json(data);
     })
 
     .post("/users/favourites", async (req,res) => { 
-        const {user, favouriteId, category} = addFavourite(req.body);
-        const data = await addFavourite(user, favouriteId, category);
+        const {userId, favouriteId, category} = req.body;
+        const objId = await addFavourite(userId, favouriteId, category);
+        const favouriteItem = await getFavouritesById(objId)
 
-        res.status(data.status).json(data.data);
+        res.status(200).json(favouriteItem);
     })
+
+    .delete("/users/favourites", async (req,res) => { 
+        const {userId, favouriteId} = req.body;
+        await deleteFavourite(userId, favouriteId);
+
+        res.status(200).json("item deleted");
+    })
+
 
 
     // ---------------------------------

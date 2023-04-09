@@ -13,14 +13,11 @@ const Auth = () =>{
 
         const setUserData = async () => {
             const id = searchParams.get("id")
-            localStorage.setItem("userId", id);
-
-            //before we set the context, query the db for the user data using the API.
             const data = await API.get(`/users/${id}`);
-            console.log(data.data)
 
+            localStorage.setItem("user", JSON.stringify(data.data));
             setCurrentUser(data.data);
-            
+
             navigate("/");
         }
 
