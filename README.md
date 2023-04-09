@@ -12,4 +12,5 @@ Palantir is a comprehensive website with a range of features, including:
 
 -User accounts that allow you to login and save your favorite movies and books to your profile.
 
-Thank you for visiting Palantir and happy exploring!
+
+Thank you for checking out Palantir!
