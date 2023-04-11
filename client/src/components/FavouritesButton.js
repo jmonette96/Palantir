@@ -2,6 +2,7 @@ import {CurrentUserContext} from "./CurrentUserContext";
 import {useContext} from 'react';
 import { API } from "../utils/axios";
 import { useEffect, useState } from "react";
+import styled from 'styled-components';
 
 const FavouritesButton = ({itemId,category}) => {
     const {currentUser, setCurrentUser} = useContext(CurrentUserContext);
@@ -45,12 +46,30 @@ const FavouritesButton = ({itemId,category}) => {
         <>
             {
                 isFavourite ? 
-                <button onClick={removeFromFavourites}>Remove from Favorites</button>
+                <Favourite>
+                    <Button onClick={removeFromFavourites}>Remove from Favorites</Button>
+                </Favourite>
                 :
-                <button onClick={addToFavourites}>Add to favorites!</button>
+                <Favourite>
+                    <Button onClick={addToFavourites}>Add to Favorites!</Button>
+                </Favourite>
             }
         </>
     )
 }
-
+const Favourite = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+const Button = styled.button`
+    cursor: pointer;
+    height: 50%;
+    font-size: 0.7em;
+    background-color: #767a52;
+    color: white;
+    :hover{
+        background-color: #5c1014;
+    }
+`;
 export default FavouritesButton;

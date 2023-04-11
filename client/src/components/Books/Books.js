@@ -9,7 +9,7 @@ const Books = ({booksData}) => {
     const {currentUser} = useContext(CurrentUserContext);
     const [viewBook, setViewBook] = useState(false)
     const [currentBook, setCurrentBook] = useState(-1);
-
+    
     const handleBookDetailsPage = (bookId) => {
             setCurrentBook(bookId)
             setViewBook(true);
@@ -20,38 +20,51 @@ const Books = ({booksData}) => {
     }
 
     return (
-        <>
+        <Big>
             <ImagesContainer>
                 {
                     !viewBook ?
-                    booksData.map(({ _id, name }, index) => (
+                    booksData.map(({ _id, name }) => (
                     <div key={_id}>
-                        <h4>{name}</h4>
                         <ImageContainer>
+                            <p>{name}</p>
                             <Image src={require(`../../assets/book_pictures/${name}.jpg`)}  onClick={() => handleBookDetailsPage(_id)}/>
                         </ImageContainer>
                         {
                             currentUser && (
-                                <FavouritesButton itemId={_id} category={"book"}/>
+                                    <FavouritesButton itemId={_id} category={"book"} style={{marginTop: "auto"}}/>
                             )
                         }
                     </div>
                     ))
                     :
-                    <Book bookId={currentBook} handleSwitchBack={handleSwitchBack} />
+                    <Book bookId={currentBook} handleSwitchBack={handleSwitchBack}/>
                 }
             </ImagesContainer>
-        </>
+        </Big>
     );
 }
-
+const Big = styled.div`
+    display: flex;
+    justify-content: center;
+    background-color: #d0c6b3;
+    margin: 10% 15% ; 
+    padding: 15px;
+    border-radius: 25px;
+`;
 const ImagesContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+    width: 85%;
 `;
 
 const ImageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 400px;
     margin: 10px;
 `;
 

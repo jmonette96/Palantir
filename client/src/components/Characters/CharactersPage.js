@@ -2,10 +2,11 @@ import { useEffect, useState  } from "react"
 import { instance } from "../../utils/axios";
 import styled from 'styled-components'
 import Characters from "./Characters";
-
+import ringLoad from '../../assets/logo/ringLoading.gif'
 
 const CharactersPage = () => {
     const [charactersInfo, setCharactersInfo] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const characterNames = [
         "Gandalf",
@@ -21,8 +22,8 @@ const CharactersPage = () => {
         "Gimli",
         "Boromir",
         "Gollum",
-        "Pippin Took",
-        "Merry Brandybuck",
+        "Peregrin Took",
+        "Meriadoc Brandybuck",
         "Tom Bombadil",
         "Théoden",
         "Faramir",
@@ -32,7 +33,8 @@ const CharactersPage = () => {
         "Smaug",
         "Radagast",
         "Éowyn",
-        "Gríma Wormtongue"
+        "Gríma Wormtongue",
+        "Treebeard"
     ]
 
     useEffect(() => {
@@ -43,13 +45,16 @@ const CharactersPage = () => {
                 (character) => characterNames.includes(character.name)
             );
             setCharactersInfo(filteredData);  
+            setIsLoading(false);
 
         };
     
         fetchData();
     }, []);
 
-
+    if (isLoading) {
+        return <img src={ringLoad}></img>;
+    }
     return(
         <>
             <Characters characters={charactersInfo}/>

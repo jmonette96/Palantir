@@ -1,11 +1,10 @@
-import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from "react";
 import {CurrentUserContext} from "./CurrentUserContext";
 import { instance } from "../utils/axios";
 import { useState, useContext } from "react";
 import Books from "../components/Books/Books";
 import Movies from "../components/Movies/Movies";
-
+import styled from 'styled-components';
 /*
     _id:6431f381510e39066da9b241
     given_name: "Jason"
@@ -31,7 +30,7 @@ const Profile = () =>{
         const fetchFavorites = async () => {
             let tempBooks = [];
             let tempMovies = [];
-            let tempCharacters = [];
+            // let tempCharacters = [];
 
             for(const favourite of currentUser.favourites){
                 switch(favourite.category){
@@ -43,10 +42,10 @@ const Profile = () =>{
                         let movie = await fetchMovie(favourite.favouriteId);
                         tempMovies.push(movie);
                         break;
-                    case "character":
-                        let character = fetchCharacter(favourite.favouriteId);
-                        tempCharacters.push(character);
-                        break;
+                    // case "character":
+                    //     let character = fetchCharacter(favourite.favouriteId);
+                    //     tempCharacters.push(character);
+                    //     break;
                 }
             }
             
@@ -68,24 +67,47 @@ const Profile = () =>{
         return res.data.docs[0];
     }
 
-    const fetchCharacter = async (characterId) => {
-        const res = await instance.get(`/character/${characterId}`);
-        return res.data.docs[0];
-    }
+    // const fetchCharacter = async (characterId) => {
+    //     const res = await instance.get(`/character/${characterId}`);
+    //     return res.data.docs[0];
+    // }
 
 
     return (
-        <div>
+        <Wrapper>
             <img src={currentUser.picture}></img>
-            <p>{currentUser.name}</p>
-            <h2>Favorite books</h2>
+            <Name>{currentUser.name}</Name>
+            <Title>Favourite Books</Title>
             <hr></hr>
-            <Books booksData={favouriteBooks}/>
-            <h2>Favorite Movies</h2>
+            {favouriteBooks.length === 0 ? 
+                <NoFavourites>No Favourites</NoFavourites>
+                :
+                <Books booksData={favouriteBooks}/>
+            }
+            <Title>Favourite Movies</Title>
             <hr></hr>
-            <Movies movieInfo={favouriteMovies}/>
-        </div>
+            {favouriteMovies.length == 0 ?
+                <NoFavourites>No Favourites</NoFavourites>    
+                :
+                <Movies movieInfo={favouriteMovies}/>
+            }
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+    margin: 25px;
+`;
+const Name = styled.p`
+    color: white;
+`;
+
+const Title = styled.h2`
+    color: white;
+`;
+const NoFavourites = styled.p`
+    color: white;
+`;
+
 
 export default Profile;

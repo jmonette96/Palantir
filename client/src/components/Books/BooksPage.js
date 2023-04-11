@@ -5,17 +5,21 @@ import Books from './Books';
 
 const BooksPage = () => {
     const [lotrBooks, setLotrBooks] = useState([])
-    
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         const fetchData = async () => {
             const res = await instance.get("/book");
             const data = res.data;
             setLotrBooks(data.docs)
-            console.log(data.docs);
+            setIsLoading(false);
         };
         fetchData();
     }, []);
 
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
     return (
         <>
             <Books booksData={lotrBooks}/>

@@ -9,19 +9,29 @@ import MoviesPage from './components/Movies/MoviePage';
 import CharactersPage from './components/Characters/CharactersPage';
 import Profile from './components/Profile';
 import { createGlobalStyle } from 'styled-components'
+import journey from './assets/character_pictures/palantir.jpg'
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: #f2f2f2;
+    background-image: url(${journey});
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 100%;
     margin:0;
     color: black;
     font-family: 'Bilbo', cursive;
+    font-size: xx-large;
   }
-  html {
-    height: 100%;
+  p{
+    font-family: 'Josefin Sans', sans-serif;
   }
-`
+  button{
+    font-family: 'Josefin Sans', sans-serif;
+  }
+  li{
+    font-family: 'Josefin Sans', sans-serif;
+  }
+`;
 
 const App = () => {
   return (

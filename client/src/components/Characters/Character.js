@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState  } from "react"
-
+import ringLoad from '../../assets/logo/ringLoading.gif'
 
 // character: "5cd99d4bde30eff6ebccfe9e"
 // dialog: "Deagol!"
@@ -41,12 +41,15 @@ const Character = ({characterData, handleSwitch}) => {
     console.log(charQuote);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div>
+                    <img src={ringLoad}></img>;
+                    <p style={{color:'white'}}>Loading...</p>
+                </div>
     }
     return(
         <>
-            <button onClick={handleSwitch}>GO BACK TO MORDORRRRRRRRRRRRRR</button>
-            <p>{charQuote.dialog}</p>
+            <BackButton onClick={handleSwitch}>GO BACK TO MORDOR!</BackButton>
+            <Quote>"{charQuote.dialog}"</Quote>
             <Wrapper>
                 <h1>{characterData.name}</h1>
                 <p>Born: {characterData.birth}</p>
@@ -60,9 +63,21 @@ const Character = ({characterData, handleSwitch}) => {
         </>
     )
 }
+const BackButton = styled.button`
+    cursor: pointer;
+    font-size: 0.7em;
+    background-color: #767a52;
+    color: white;
+    :hover{
+        background-color: #5c1014;
+    }
+`;
+const Quote = styled.p`
+    font-style: italic;
+    max-width: 60%;
+`;
 
 const Wrapper = styled.div`
-
 `;
 
 export default Character;

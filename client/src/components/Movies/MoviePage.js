@@ -1,12 +1,12 @@
 import { useEffect, useState  } from "react"
 import { instance } from "../../utils/axios";
-import styled from 'styled-components'
 import Movies from './Movies';
+import ringLoad from '../../assets/logo/ringLoading.gif'
 
 const MoviesPage = () => {
     const [lotrMovies, setLotrMovies] = useState([])
     const [movieInfo, setMovieInfo] = useState([])
-
+    const [isLoading, setIsLoading] = useState(true);
 
     //API has info we do not need....
     const movieNames = [
@@ -49,10 +49,17 @@ const MoviesPage = () => {
             //set the data so we render to the screen.
             console.log(tempArr)
             setMovieInfo(tempArr);
+            setIsLoading(false);
         }
         fetchMoviesData();
     }, [lotrMovies]);
 
+    if (isLoading) {
+        return <div>
+                    <img src={ringLoad}></img>;
+                    <p style={{color:'white'}}>Loading...</p>
+                </div>
+    }
     return (
         <>
         { movieInfo.length > 0 &&

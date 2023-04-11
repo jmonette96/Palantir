@@ -20,17 +20,19 @@ const Movies = ({movieInfo}) => {
     }
     
     return (
-        <>
-            <Wrapper>
+        <Big>
+            <ImagesContainer>
                 
                 { !showMovie ? 
                     movieInfo.map((movie, i) => (
                         <div key={i}>
                             <p>{movie.name}</p>
-                            <Image 
-                                src={require(`../../assets/movie_pictures/${movie.name}.jpg`)}
-                                onClick={() => handleShowMovie(movie)}
-                            />
+                            <ImageContainer>
+                                <Image 
+                                    src={require(`../../assets/movie_pictures/${movie.name}.jpg`)}
+                                    onClick={() => handleShowMovie(movie)}
+                                />
+                            </ImageContainer>
                             {
                                 currentUser && (
                                     <FavouritesButton itemId={movie._id} category={"movie"}/>
@@ -42,26 +44,40 @@ const Movies = ({movieInfo}) => {
                     :
                     <Movie movieData={movie} handleSwitch={handleSwitch}/>
                 }
-            </Wrapper>
-        </>
+            </ImagesContainer>
+        </Big>
     )
 }
 
+const Big = styled.div`
+    display: flex;
+    justify-content: center;
+    background-color: #d0c6b3;
+    margin: 10% 15% ; 
+    padding: 15px;
+    border-radius: 25px;
+`;
+const ImagesContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 85%;
+`;
+
+const ImageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 400px;
+    margin: 10px;
+`;
+
 const Image = styled.img`
+    width: 200px;
+    height: 350px;
+    object-fit: contain;
     cursor: pointer;
 `;
-
-const Wrapper = styled.div`
-
-`;
-
-const BooksButton = styled.button`
-    cursor: pointer;
-    img {
-        width: 19.9%;
-        height: 25%;
-    }
-`;
-
 
 export default Movies;
