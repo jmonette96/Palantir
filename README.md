@@ -1,5 +1,7 @@
 # Palantir - The Lord of the Rings Wiki (Original Trilogy)
 Palantir is a wiki-style website dedicated to the original Lord of the Rings trilogy. It offers information and details about the books, movies, and characters in the series.
+![image](https://user-images.githubusercontent.com/122751588/231493399-c2aa4936-8776-473f-99bc-71fcc83bf9a4.png)
+
 
 ## Features
 Palantir is a website with a range of features, including:
