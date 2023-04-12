@@ -29,7 +29,6 @@ const CharactersPage = () => {
         "Radagast",
         "Éomer",
         "Isildur",
-        "Radagast",
         "Éowyn",
         "Gríma Wormtongue",
         "Treebeard",

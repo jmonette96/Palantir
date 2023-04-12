@@ -42,16 +42,17 @@ const Character = ({characterData, handleSwitch}) => {
         <>
             <BackButton onClick={handleSwitch}>Back to Mordor</BackButton>
             {!charQuote || !charQuote.dialog ? <p>No quotes available</p> : <Quote>"{charQuote.dialog}"</Quote>}
-            <Wrapper>
+            <div>
                 <h1>{characterData.name}</h1>
-                <p>Born: {characterData.birth}</p>
-                <p>Death: {characterData.death}</p>
-                <p>Gender: {characterData.gender}</p>
-                <p>Hair: {characterData.hair}</p>
-                <p>Height: {characterData.height}</p>
+                <p>Born: {characterData.birth ? characterData.birth : "Unknown"}</p>
+                <p>Death: {characterData.death ? characterData.death : "Unknown"}</p>
+                <p>Race: {characterData.race ? characterData.race : "Unknown"}</p>
+                <p>Gender: {characterData.gender ? characterData.gender : "Unknown"}</p>
+                <p>Hair: {characterData.hair ? characterData.hair : "Unknown"}</p>
+                <p>Height: {characterData.height ? characterData.height : "Unknown"}</p>
                 <p>Realm: {characterData.realm ? characterData.realm : "Unknown"}</p>
                 <p>Spouse: {characterData.spouse ? characterData.spouse : "Unknown"}</p>
-            </Wrapper>
+            </div>
         </>
     )
 }
@@ -67,9 +68,6 @@ const BackButton = styled.button`
 const Quote = styled.p`
     font-style: italic;
     max-width: 60%;
-`;
-
-const Wrapper = styled.div`
 `;
 
 export default Character;
