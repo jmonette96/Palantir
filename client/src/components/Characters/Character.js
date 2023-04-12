@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState  } from "react"
-import ringLoad from '../../assets/logo/ringLoading.gif'
+import ringLoad from '../../assets/logo/ringSpin.gif'
 
 // character: "5cd99d4bde30eff6ebccfe9e"
 // dialog: "Deagol!"
@@ -41,15 +41,15 @@ const Character = ({characterData, handleSwitch}) => {
     console.log(charQuote);
 
     if (isLoading) {
-        return <div>
-                    <img src={ringLoad}></img>;
+        return <div style={{ backgroundColor: 'black', color: 'white', textAlign: 'center' }}>
+                    <img src={ringLoad}></img>
                     <p style={{color:'white'}}>Loading...</p>
                 </div>
     }
     return(
         <>
-            <BackButton onClick={handleSwitch}>GO BACK TO MORDOR!</BackButton>
-            <Quote>"{charQuote.dialog}"</Quote>
+            <BackButton onClick={handleSwitch}>Back to Mordor</BackButton>
+            {!charQuote || !charQuote.dialog ? <p>No quotes available</p> : <Quote>"{charQuote.dialog}"</Quote>}
             <Wrapper>
                 <h1>{characterData.name}</h1>
                 <p>Born: {characterData.birth}</p>

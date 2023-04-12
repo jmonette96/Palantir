@@ -4,8 +4,7 @@ import frodo from '../assets/character_pictures/squad.gif';
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import scroll from '../assets/character_pictures/scroll.png'
-import bg from '../assets/logo/bgDes.png'
-import gritty from '../assets/logo/grit.png'
+
 
 const Homepage = () => {
     const navigate = useNavigate();

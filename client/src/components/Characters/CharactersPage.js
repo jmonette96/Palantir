@@ -2,7 +2,7 @@ import { useEffect, useState  } from "react"
 import { instance } from "../../utils/axios";
 import styled from 'styled-components'
 import Characters from "./Characters";
-import ringLoad from '../../assets/logo/ringLoading.gif'
+import ringLoad from '../../assets/logo/ringSpin.gif'
 
 const CharactersPage = () => {
     const [charactersInfo, setCharactersInfo] = useState([]);
@@ -30,11 +30,11 @@ const CharactersPage = () => {
         "Radagast",
         "Éomer",
         "Isildur",
-        "Smaug",
         "Radagast",
         "Éowyn",
         "Gríma Wormtongue",
-        "Treebeard"
+        "Treebeard",
+        "Arwen"
     ]
 
     useEffect(() => {
@@ -53,7 +53,10 @@ const CharactersPage = () => {
     }, []);
 
     if (isLoading) {
-        return <img src={ringLoad}></img>;
+        return <div style={{ backgroundColor: 'black', color: 'white', textAlign: 'center' }}>
+                    <img src={ringLoad}></img>
+                    <p style={{color:'white'}}>Loading...</p>
+                </div>
     }
     return(
         <>

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useEffect, useState } from "react";
 import { instance } from '../../utils/axios';
 import fellow from '../../assets/book_pictures/books.jpg'
+import ringLoad from '../../assets/logo/ringSpin.gif'
 
 const Book = ({bookId, handleSwitchBack}) => {
     const [chapters,setChapters] = useState([]);
@@ -21,7 +22,10 @@ const Book = ({bookId, handleSwitchBack}) => {
     }, []);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div style={{ backgroundColor: 'black', color: 'white', textAlign: 'center' }}>
+                    <img src={ringLoad}></img>
+                    <p style={{color:'white'}}>Loading...</p>
+                </div>
     }
     return(
         <>

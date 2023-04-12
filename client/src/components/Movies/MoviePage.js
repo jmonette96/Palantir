@@ -1,7 +1,7 @@
 import { useEffect, useState  } from "react"
 import { instance } from "../../utils/axios";
 import Movies from './Movies';
-import ringLoad from '../../assets/logo/ringLoading.gif'
+import ringLoad from '../../assets/logo/ringSpin.gif'
 
 const MoviesPage = () => {
     const [lotrMovies, setLotrMovies] = useState([])
@@ -46,6 +46,12 @@ const MoviesPage = () => {
                     tempArr.push(movie.docs[0])
                 }
             }
+            // sort the tempArr array based on the index of movie names in movieNames array
+            tempArr.sort((a, b) => {
+                const indexA = movieNames.indexOf(a.name);
+                const indexB = movieNames.indexOf(b.name);
+                return indexA - indexB;
+            });
             //set the data so we render to the screen.
             console.log(tempArr)
             setMovieInfo(tempArr);
@@ -54,9 +60,9 @@ const MoviesPage = () => {
         fetchMoviesData();
     }, [lotrMovies]);
 
-    if (isLoading) {
-        return <div>
-                    <img src={ringLoad}></img>;
+    if (isLoading || !movieInfo.length) {
+        return <div style={{ backgroundColor: 'black', color: 'white', textAlign: 'center' }}>
+                    <img src={ringLoad}></img>
                     <p style={{color:'white'}}>Loading...</p>
                 </div>
     }

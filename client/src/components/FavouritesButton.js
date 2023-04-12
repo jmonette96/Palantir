@@ -36,7 +36,7 @@ const FavouritesButton = ({itemId,category}) => {
         });
 
         let tempUser = currentUser;
-        tempUser.favourites = tempUser.favourites.filter((x) => x.favouriteId !== itemId && x.userId !== currentUser._id)
+        tempUser.favourites = tempUser.favourites.filter((x) => !(x.favouriteId === itemId && x.userId === currentUser._id))
         setCurrentUser(tempUser);
         localStorage.setItem("user", JSON.stringify(tempUser));
         setIsFavourite(false);
