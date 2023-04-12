@@ -8,8 +8,6 @@ const Header = () => {
     const navigate = useNavigate();
     const {currentUser} = useContext(CurrentUserContext);
 
-    console.log(currentUser)
-
     const handleLogout = () => {
         localStorage.removeItem("user");
         window.location.href = "http://localhost:8000/logout";
@@ -39,7 +37,7 @@ const Header = () => {
         </Wrapper>
     )
 }
-// #A68E6A
+
 const Wrapper = styled.span`
     display: flex;
     justify-content: space-between;

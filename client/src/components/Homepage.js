@@ -51,11 +51,9 @@ const BigWrapper  = styled.div`
     background-size: 20px 20px;
     margin: 100px 200px; 
     min-height: 75vh;
-
 `;
 
 const Wrapper = styled.span`
-
 `;
 const Scroll = styled.span`
     margin:20px;
@@ -151,7 +149,6 @@ const CharactersButton = styled(Button)`
         height: 100%;
         width: 95%;
     }
-
 `;
 
 const BooksButton = styled(Button)`

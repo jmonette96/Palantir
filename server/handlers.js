@@ -2,12 +2,6 @@
 const client = require("./utils/client");
 const ObjectId = require('mongodb').ObjectId;
 
-const categories = [
-    "MOVIE",
-    "BOOK",
-    "CHARACTERS"
-];
-
 const addUser = async (user) => {
 
     try {

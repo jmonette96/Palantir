@@ -5,20 +5,6 @@ import { useState, useContext } from "react";
 import Books from "../components/Books/Books";
 import Movies from "../components/Movies/Movies";
 import styled from 'styled-components';
-/*
-    _id:6431f381510e39066da9b241
-    given_name: "Jason"
-    family_name: "Monette"
-    nickname: "jmonette07"
-    name: "Jason Monette"
-    picture: "https://lh3.googleusercontent.com/a/AGNmyxYTSN8GvHpFviEAAwcUa_jZCoEoUg…"
-    locale: "en"
-    updated_at: "2023-04-08T23:06:39.142Z"
-    email: "jmonette07@gmail.com"
-    email_verified: true
-    sub: "google-oauth2|115606100653114590770"
-    sid: "P_ZEHg57C-5NwaG2HhoZUe27Z0lzcqX2"
-*/
 
 const Profile = () =>{
     const {currentUser} = useContext(CurrentUserContext);
@@ -30,7 +16,6 @@ const Profile = () =>{
         const fetchFavorites = async () => {
             let tempBooks = [];
             let tempMovies = [];
-            // let tempCharacters = [];
 
             for(const favourite of currentUser.favourites){
                 switch(favourite.category){
@@ -42,13 +27,8 @@ const Profile = () =>{
                         let movie = await fetchMovie(favourite.favouriteId);
                         tempMovies.push(movie);
                         break;
-                    // case "character":
-                    //     let character = fetchCharacter(favourite.favouriteId);
-                    //     tempCharacters.push(character);
-                    //     break;
                 }
             }
-            
             setFavouriteBooks(tempBooks);
             setfavouriteMovies(tempMovies);
         }
@@ -66,12 +46,6 @@ const Profile = () =>{
         const res = await instance.get(`/movie/${movieId}`);
         return res.data.docs[0];
     }
-
-    // const fetchCharacter = async (characterId) => {
-    //     const res = await instance.get(`/character/${characterId}`);
-    //     return res.data.docs[0];
-    // }
-
 
     return (
         <Wrapper>

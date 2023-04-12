@@ -22,7 +22,6 @@ const MoviesPage = () => {
             const data = (await res).data;
             const ids = data.docs.map((movie) => movie._id);
             setLotrMovies(ids);
-            console.log(ids);
         };
 
         fetchData();
@@ -53,7 +52,6 @@ const MoviesPage = () => {
                 return indexA - indexB;
             });
             //set the data so we render to the screen.
-            console.log(tempArr)
             setMovieInfo(tempArr);
             setIsLoading(false);
         }

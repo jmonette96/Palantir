@@ -2,12 +2,6 @@ import styled from 'styled-components';
 import { useEffect, useState  } from "react"
 import ringLoad from '../../assets/logo/ringSpin.gif'
 
-// character: "5cd99d4bde30eff6ebccfe9e"
-// dialog: "Deagol!"
-// id: "5cd96e05de30eff6ebcce7e9"
-// movie: "5cd95395de30eff6ebccde5d"
-// _id: "5cd96e05de30eff6ebcce7e9"
-
 const Character = ({characterData, handleSwitch}) => {
     const [charQuote, setCharQuote] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -37,8 +31,6 @@ const Character = ({characterData, handleSwitch}) => {
     
         fetchData();
     }, []);
-    
-    console.log(charQuote);
 
     if (isLoading) {
         return <div style={{ backgroundColor: 'black', color: 'white', textAlign: 'center' }}>

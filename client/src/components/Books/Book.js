@@ -12,8 +12,6 @@ const Book = ({bookId, handleSwitchBack}) => {
         const fetchData = async () => {
             const res = await instance.get(`/book/${bookId}/chapter`)
             const bookData = res.data;
-
-            console.log("bookdata",bookData)
             setChapters(bookData.docs);
             setIsLoading(false);
         };
@@ -34,7 +32,7 @@ const Book = ({bookId, handleSwitchBack}) => {
                 <BookImage src={fellow }></BookImage>
             </BookImageDiv>
             <ChaptersDiv>
-                <h3>Chapters</h3>
+                <h1>Chapters</h1>
                 {chapters.length > 0 && 
                     <ol>
                         {chapters.map((chapter) => (

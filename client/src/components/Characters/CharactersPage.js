@@ -1,6 +1,5 @@
 import { useEffect, useState  } from "react"
 import { instance } from "../../utils/axios";
-import styled from 'styled-components'
 import Characters from "./Characters";
 import ringLoad from '../../assets/logo/ringSpin.gif'
 

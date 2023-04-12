@@ -22,8 +22,6 @@ const Movie = ({movieData, handleSwitch}) => {
     )
 }
 
-const Wrapper = styled.div`
-`;
 const MovieImageDiv = styled.div`
     position: absolute;
     top: 500px;
@@ -32,7 +30,6 @@ const MovieImage = styled.img`
     width: 35%;
     height: 50%;
     margin-top: 70px;
-    /* border-radius: 25px; */
 `;
 const BackButton = styled.button`
     cursor: pointer;
