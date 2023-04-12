@@ -17,4 +17,6 @@ Palantir is a website with a range of features, including:
 
 Thank you for checking out Palantir!
 
+
+
 ![tumblr_odb4u3HvI01r3ykuvo5_400](https://user-images.githubusercontent.com/122751588/231494051-64116fd2-0720-4936-bc9c-50215cea22fe.gif)
